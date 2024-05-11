@@ -41,7 +41,15 @@ const shopAndCartSlice = createSlice({
                     });
                 }
             } else {
-                state.cartProducts.push(addItem)
+                if(addItem.instockQuantity > 0){
+                    state.cartProducts.push(addItem)
+                }else{
+                    Swal.fire({
+                        title: "Sorry",
+                        text: "There is not enough stock for this watch!",
+                        icon: "warning"
+                    });
+                }
             }
         },
         increaseQty: (state, { payload }) => {
